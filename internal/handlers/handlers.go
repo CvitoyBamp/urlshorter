@@ -4,23 +4,23 @@ import (
 	"fmt"
 	"github.com/go-chi/chi"
 	"github.com/go-chi/chi/middleware"
-	"github.com/go-chi/cors"
 	"io"
 	"log"
 	"net/http"
 	"net/url"
 )
 
-func (server *Server) ShortURlRouter() http.Handler {
+func (server *Server) ShortURLRouter() http.Handler {
 	r := chi.NewRouter()
 	r.Use(middleware.Logger)
 
-	c := cors.New(cors.Options{
-		AllowedMethods:     []string{"GET", "POST", "OPTION"},
-		AllowedHeaders:     []string{"Content-Type", "Location"},
-		OptionsPassthrough: true,
-	})
-	r.Use(c.Handler)
+	//c := cors.New(cors.Options{
+	//	AllowedOrigins:     []string{"https://*", "http://*"},
+	//	AllowedMethods:     []string{"GET", "POST", "OPTION"},
+	//	AllowedHeaders:     []string{"Content-Type", "Location"},
+	//	OptionsPassthrough: true,
+	//})
+	//r.Use(c.Handler)
 
 	r.Route("/", func(r chi.Router) {
 		r.Post("/", server.shorterCreatorHandler)
@@ -55,7 +55,6 @@ func (server *Server) shorterCreatorHandler(res http.ResponseWriter, req *http.R
 	res.Header().Set("Content-Type", "text/plain")
 	res.Write([]byte(val))
 	log.Printf("successful response for shorter %s for address %s", val, uri.String())
-	return
 }
 
 func (server *Server) shorterHandler(res http.ResponseWriter, req *http.Request) {

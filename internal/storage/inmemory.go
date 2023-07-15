@@ -25,7 +25,7 @@ func CreateStorage() *Storage {
 
 func (s *Storage) AddURL(url string) (string, error) {
 
-	short := shortner.RandUrlName(shortLen)
+	short := shortner.RandURLName(shortLen)
 
 	s.RLock()
 	for k, v := range s.store {

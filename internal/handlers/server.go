@@ -32,5 +32,5 @@ func CreateServer() *Server {
 }
 
 func (server *Server) RunServer() error {
-	return http.ListenAndServe(server.Server.Addr, server.ShortURlRouter())
+	return http.ListenAndServe(server.Server.Addr, server.ShortURLRouter())
 }
